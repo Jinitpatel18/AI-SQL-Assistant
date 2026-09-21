@@ -1,16 +1,18 @@
-import * as SibApiV3Sdk from '@getbrevo/brevo';
+import * as brevo from '@getbrevo/brevo';
 
-const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
+const apiInstance = new brevo.TransactionalEmailsApi();
+
 apiInstance.setApiKey(
-    SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey,
+    brevo.TransactionalEmailsApiApiKeys.apiKey,
     process.env.BREVO_API_KEY
 );
 
 export const sendOtpEmail = async (to, otp) => {
     try {
-        const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
+        const sendSmtpEmail = new brevo.SendSmtpEmail();
+
         sendSmtpEmail.sender = {
-            email: process.env.BREVO_SENDER_EMAIL,   // tumhara verified email
+            email: process.env.BREVO_SENDER_EMAIL,
             name: 'AI SQL Assistant',
         };
         sendSmtpEmail.to = [{ email: to }];
