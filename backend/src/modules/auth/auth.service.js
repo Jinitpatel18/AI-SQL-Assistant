@@ -32,7 +32,9 @@ export const signupUser = async ({ name, email, password }) => {
     });
 
     // OTP email bhejo
-    await sendOtpEmail(email, otp);
+    sendOtpEmail(email, otp).catch(err =>
+        console.error('Background email failed:', err.message)
+    );
 
     return { id: user.id, email: user.email };
 };
@@ -95,7 +97,9 @@ export const loginUser = async ({ email, password }) => {
         data: { otp, otpExpiresAt },
     });
 
-    await sendOtpEmail(email, otp);
+    sendOtpEmail(email, otp).catch(err =>
+        console.error('Background email failed:', err.message)
+    );
 
     return { message: 'OTP sent to your email. Please verify to complete login.' };
 };
